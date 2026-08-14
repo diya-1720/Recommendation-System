@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useLocation,
 } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
@@ -18,12 +19,29 @@ import MyUniverse from './pages/MyUniverse';
 
 import MovieDetailsModal from './components/MovieDetailsModal';
 import AuthPromptModal from './components/AuthPromptModal';
+import IntroSplashScreen from './components/IntroSplashScreen';
 
 import { searchMovies, getMovieById } from './services/api';
 
-import { Search, X, Star } from 'lucide-react';
+import { Search, X, Star, ChevronUp } from 'lucide-react';
+
+// Scroll to top helper on route change
+function ScrollToTopOnRoute() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
+  }, [pathname]);
+
+  return null;
+}
 
 export default function App() {
+  const [showIntro, setShowIntro] = useState(true);
   const [theme, setTheme] = useState(() => {
     return (
       localStorage.getItem('vyora_theme') ||
@@ -48,6 +66,29 @@ export default function App() {
 
   const [isAuthModalOpen, setIsAuthModalOpen] =
     useState(false);
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Scroll position listener for Scroll-To-Top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 350) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   // Apply theme
   useEffect(() => {
@@ -145,6 +186,8 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTopOnRoute />
+      {showIntro && <IntroSplashScreen onComplete={() => setShowIntro(false)} />}
       <div
         className={
           theme === 'night'
@@ -178,12 +221,14 @@ export default function App() {
               inset: 0,
               zIndex: 3000,
               backgroundColor:
-                'rgba(24, 13, 26, 0.75)',
-              backdropFilter: 'blur(6px)',
+                'rgba(24, 13, 26, 0.82)',
+              backdropFilter: 'blur(10px)',
               display: 'flex',
               alignItems: 'flex-start',
               justifyContent: 'center',
               paddingTop: '80px',
+              paddingLeft: '16px',
+              paddingRight: '16px',
             }}
             onClick={() =>
               setIsSearchOpen(false)
@@ -200,7 +245,7 @@ export default function App() {
                   'var(--bg-card)',
                 border:
                   '1px solid var(--border-medium)',
-                borderRadius: '4px',
+                borderRadius: '6px',
                 padding: '24px',
                 boxShadow:
                   'var(--shadow-lg)',
@@ -539,6 +584,19 @@ export default function App() {
             />
           </Routes>
         </div>
+
+        {/* FLOATING SCROLL-TO-TOP ACTION BUTTON */}
+        {showScrollTop && (
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="scroll-to-top-btn animate-fade-in"
+            aria-label="Scroll to top of page"
+            title="Scroll to top"
+          >
+            <ChevronUp size={22} />
+          </button>
+        )}
 
         {/* MOVIE DETAILS MODAL */}
         {activeModalMovie && (

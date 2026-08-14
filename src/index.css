@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VYORA — Lilita One + Inter Typography System
+   VYORA — Lilita One + Inter Typography System & Responsive Design Core
    ========================================================================== */
 
 :root {
@@ -102,18 +102,54 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: var(--theme-transition);
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   overflow-x: hidden;
   background-color: var(--vyora-bg);
   background-image: 
-    radial-gradient(circle at 40% 0%, rgba(168, 117, 255, 0.08) 0%, transparent 60%),
-    radial-gradient(circle at 85% 85%, rgba(228, 107, 168, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 20% 15%, rgba(168, 117, 255, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 80% 25%, rgba(228, 107, 168, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 70%, rgba(231, 196, 106, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 10% 85%, rgba(128, 81, 214, 0.14) 0%, transparent 45%);
   color: var(--vyora-text);
   transition: var(--theme-transition);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Subtle Animated Cosmic Multiverse Atmosphere for Night Mode (Lag-Free 60fps) */
+body::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: -1;
+  background: 
+    radial-gradient(ellipse at 30% 30%, rgba(168, 117, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(228, 107, 168, 0.06) 0%, transparent 50%);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  animation: cosmicAtmosphereDrift 22s ease-in-out infinite alternate;
+}
+
+@keyframes cosmicAtmosphereDrift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-2%, 1.5%, 0) scale(1.02); }
+  100% { transform: translate3d(1.5%, -1.5%, 0) scale(1); }
+}
+
+/* Hardware Acceleration & GPU Optimizations */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Subtle Film & Cosmic Atmosphere Overlay */
@@ -175,6 +211,15 @@ p {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--vyora-accent-secondary);
+}
+
+/* Hide scrollbars for clean horizontally scrollable filter rows */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Film Strip & Editorial Border Utility */
@@ -252,11 +297,15 @@ p {
   border-radius: 3px;
   box-shadow: 0 4px 20px rgba(168, 117, 255, 0.35);
   text-decoration: none;
+  user-select: none;
 }
 .btn-cinematic-primary:hover {
   background-color: #B98EFF;
   transform: translateY(-2px);
   box-shadow: 0 8px 28px rgba(168, 117, 255, 0.5);
+}
+.btn-cinematic-primary:active {
+  transform: translateY(0);
 }
 
 .btn-cinematic-secondary {
@@ -277,12 +326,16 @@ p {
   transition: all 0.3s var(--ease-cinematic);
   border-radius: 3px;
   text-decoration: none;
+  user-select: none;
 }
 .btn-cinematic-secondary:hover {
   background-color: var(--vyora-bg-secondary);
   border-color: var(--vyora-accent);
   color: var(--vyora-accent);
   transform: translateY(-2px);
+}
+.btn-cinematic-secondary:active {
+  transform: translateY(0);
 }
 
 .btn-cinematic-ghost {
@@ -297,6 +350,7 @@ p {
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  user-select: none;
 }
 .btn-cinematic-ghost:hover {
   color: var(--vyora-accent-secondary);
@@ -310,7 +364,7 @@ p {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s var(--ease-cinematic) forwards;
+  animation: fadeIn 0.4s var(--ease-cinematic) forwards;
 }
 
 @keyframes floatSubtle {
@@ -331,15 +385,171 @@ p {
   animation: pulseGlow 3s ease-in-out infinite;
 }
 
+@keyframes slideDownDrawer {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-down {
+  animation: slideDownDrawer 0.3s var(--ease-cinematic) forwards;
+}
+
+/* Floating Scroll-To-Top Button */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1500;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--vyora-surface);
+  color: var(--vyora-accent);
+  border: 1.5px solid var(--vyora-accent);
+  box-shadow: 0 8px 24px rgba(18, 10, 24, 0.7), var(--vyora-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-cinematic);
+  backdrop-filter: blur(10px);
+}
+.scroll-to-top-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  background-color: var(--vyora-accent);
+  color: #120A18;
+  box-shadow: 0 12px 30px rgba(168, 117, 255, 0.5);
+}
+
+/* Floating Mobile Bottom Navigation Bar (< 768px) */
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1400;
+  background-color: rgba(18, 10, 24, 0.92);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--vyora-border-strong);
+  padding: 8px 16px;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+}
+
 /* Accessible focus outlines */
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
   outline: 2px solid var(--vyora-accent);
   outline-offset: 3px;
 }
 
-/* Header Responsiveness */
+/* Comprehensive Responsive Breakpoints */
 @media (max-width: 900px) {
   .desktop-nav-links {
     display: none !important;
   }
+
+  .mobile-nav-toggle {
+    display: flex !important;
+  }
+
+  .scroll-to-top-btn {
+    bottom: 80px;
+    right: 20px;
+  }
 }
+
+@media (max-width: 768px) {
+  .mobile-bottom-bar {
+    display: flex !important;
+  }
+
+  main {
+    padding-bottom: 100px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  h1, .heading-editorial {
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ==========================================================================
+   3D INTRO SPLASH SCREEN TYPOGRAPHY & ANIMATION UTILITIES
+   ========================================================================== */
+.text-3d-vyora {
+  font-family: var(--font-display);
+  color: var(--vyora-text);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 
+    0 1px 0 #A875FF,
+    0 2px 0 #9356FF,
+    0 3px 0 #8051D6,
+    0 4px 0 #6C3EB5,
+    0 5px 0 #582C94,
+    0 6px 0 #462075,
+    0 8px 24px rgba(168, 117, 255, 0.65),
+    0 16px 48px rgba(18, 10, 24, 0.9);
+  will-change: transform, filter;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes textShimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--vyora-text) 0%,
+    var(--vyora-accent) 25%,
+    var(--vyora-gold) 50%,
+    var(--vyora-accent-secondary) 75%,
+    var(--vyora-text) 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShimmerSweep 4s linear infinite;
+}
+
+@keyframes mascot3DIntroPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(40px) rotate(-12deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08) translateY(-10px) rotate(4deg);
+  }
+  80% {
+    transform: scale(0.96) translateY(2px) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+.animate-mascot-intro {
+  animation: mascot3DIntroPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes progressPulseGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(168, 117, 255, 0.4); }
+  50% { box-shadow: 0 0 20px rgba(168, 117, 255, 0.9), 0 0 35px rgba(231, 196, 106, 0.6); }
+}
+
+.animate-progress-glow {
+  animation: progressPulseGlow 1.5s ease-in-out infinite;
+}
+

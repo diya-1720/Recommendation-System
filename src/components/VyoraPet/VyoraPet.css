@@ -1,12 +1,12 @@
 /* ==========================================================================
-   VYORA DUAL DIGITAL PET SPRITE ANIMATION SYSTEM
+   VYORA HANDCRAFTED DUAL DIGITAL PET SPRITE ANIMATION SYSTEM
    ========================================================================== */
 
 /* Invisible Pet Floor Strip at Bottom of Footer */
 .vyora-pet-floor {
   position: relative;
   width: 100%;
-  height: 65px;
+  height: 72px;
   margin-bottom: 24px;
   border-bottom: 1px dashed var(--vyora-border-strong);
   pointer-events: none;
@@ -18,12 +18,12 @@
 /* Subtle Ground Track Decorative Elements */
 .vyora-pet-ground-track {
   position: absolute;
-  bottom: 2px;
+  bottom: 4px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-around;
-  opacity: 0.2;
+  opacity: 0.25;
   font-size: 0.75rem;
   color: var(--vyora-accent);
   pointer-events: none;
@@ -32,7 +32,7 @@
 /* 2D Digital Pet Character World Wrapper */
 .vyora-pet-character {
   position: absolute;
-  bottom: 6px;
+  bottom: 8px;
   left: 0;
   pointer-events: auto;
   cursor: pointer;
@@ -41,8 +41,9 @@
   flex-direction: column;
   align-items: center;
   user-select: none;
-  transition: transform 0.08s linear;
+  transition: transform 0.12s ease-out;
   outline: none;
+  will-change: transform;
 }
 
 .vyora-pet-character:focus-visible {
@@ -55,16 +56,28 @@
 .vyora-pet-frame-wrap {
   display: inline-block;
   line-height: 0;
-  filter: drop-shadow(0 4px 8px rgba(18, 10, 24, 0.45));
+  filter: drop-shadow(0 6px 12px rgba(18, 10, 24, 0.5));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Contact Shadow Standing ON Floor */
 .vyora-pet-contact-shadow {
   width: 38px;
   height: 6px;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 75%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 75%);
   border-radius: 50%;
   margin-top: -2px;
+  transition: transform 0.12s ease-out, opacity 0.12s ease-out;
+}
+
+/* Playful Hop Class */
+.pet-hopping .vyora-pet-frame-wrap {
+  animation: petPlayfulHop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pet-hopping .vyora-pet-contact-shadow {
+  transform: scale(0.6);
+  opacity: 0.3;
 }
 
 /* Interactive Speech Popup Bubble */
@@ -72,21 +85,23 @@
   position: absolute;
   bottom: 100%;
   left: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   background-color: var(--vyora-surface);
   border: 1.5px solid var(--vyora-accent);
   color: var(--vyora-text);
   padding: 6px 14px;
   border-radius: 16px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   white-space: nowrap;
-  box-shadow: var(--vyora-glow);
+  box-shadow: 0 8px 24px rgba(18, 10, 24, 0.6), var(--vyora-glow);
   z-index: 30;
-  max-width: 220px;
+  max-width: 240px;
   overflow: hidden;
   text-overflow: ellipsis;
-  animation: petBubblePop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: petBubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .vyora-pet-bubble-arrow {
@@ -103,18 +118,24 @@
 
 /* Click Reaction Bounce */
 .pet-clicked .vyora-pet-frame-wrap {
-  animation: petClickBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: petClickBounce 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@keyframes petClickBounce {
+@keyframes petPlayfulHop {
   0% { transform: translateY(0) scale(1); }
-  40% { transform: translateY(-10px) scale(1.15); }
-  70% { transform: translateY(2px) scale(0.95); }
+  50% { transform: translateY(-14px) scale(1.1); }
   100% { transform: translateY(0) scale(1); }
 }
 
+@keyframes petClickBounce {
+  0% { transform: translateY(0) scale(1) rotate(0deg); }
+  30% { transform: translateY(-16px) scale(1.18) rotate(-6deg); }
+  60% { transform: translateY(-4px) scale(1.05) rotate(4deg); }
+  100% { transform: translateY(0) scale(1) rotate(0deg); }
+}
+
 @keyframes petBubblePop {
-  from { opacity: 0; transform: translateX(-50%) translateY(4px) scale(0.85); }
+  from { opacity: 0; transform: translateX(-50%) translateY(8px) scale(0.8); }
   to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 

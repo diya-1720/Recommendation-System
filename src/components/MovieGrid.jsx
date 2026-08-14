@@ -20,7 +20,7 @@ export default function MovieGrid({ movies, selectedMood, onSelectMovie }) {
       style={{
         maxWidth: '1280px',
         margin: '0 auto',
-        padding: '40px 24px 80px 24px'
+        padding: '30px 16px 60px 16px'
       }}
     >
       <div
@@ -42,17 +42,20 @@ export default function MovieGrid({ movies, selectedMood, onSelectMovie }) {
           }
         />
 
-        {/* Genre Filter Bar */}
+        {/* Genre Filter Bar - Horizontally Scrollable on Mobile */}
         <div
+          className="no-scrollbar"
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            flexWrap: 'wrap',
+            overflowX: 'auto',
+            width: '100%',
+            paddingBottom: '8px',
             marginTop: '8px'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginRight: '8px', color: 'var(--vyora-text-muted)', fontSize: '0.8rem', fontWeight: 600 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginRight: '8px', color: 'var(--vyora-text-muted)', fontSize: '0.8rem', fontWeight: 600, flexShrink: 0 }}>
             <SlidersHorizontal size={14} color="var(--vyora-accent)" />
             <span>GENRE:</span>
           </div>
@@ -72,7 +75,9 @@ export default function MovieGrid({ movies, selectedMood, onSelectMovie }) {
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  flexShrink: 0,
+                  whiteSpace: 'nowrap'
                 }}
               >
                 {genre}
@@ -82,13 +87,13 @@ export default function MovieGrid({ movies, selectedMood, onSelectMovie }) {
         </div>
       </div>
 
-      {/* Movie Grid */}
+      {/* Movie Grid - Universal Responsiveness */}
       {filteredMovies.length > 0 ? (
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-            gap: '28px'
+            gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(150px, 45vw, 240px), 1fr))',
+            gap: '20px'
           }}
         >
           {filteredMovies.map(movie => (

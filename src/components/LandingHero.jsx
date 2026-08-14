@@ -8,36 +8,38 @@ export default function LandingHero({ onSignIn }) {
   return (
     <header
       style={{
-        padding: '70px 24px 90px 24px',
+        padding: '50px 20px 80px 20px',
         maxWidth: '1200px',
         margin: '0 auto',
         position: 'relative'
       }}
     >
       {/* Brand Subtitle / Stamp */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' }}>
         <span className="stamp-badge-pink">✦ CINEMATIC CULTURE MAGAZINE</span>
         <span style={{ fontSize: '0.8rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--vyora-text-muted)', fontWeight: 600 }}>
           DISCOVERY ENGINE
         </span>
       </div>
 
-      {/* Main Asymmetrical Hero Grid */}
+      {/* Main Asymmetrical Hero Layout */}
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, 1fr)',
-          gap: '32px',
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          gap: '40px',
           alignItems: 'center',
+          justifyContent: 'space-between',
           marginBottom: '60px'
         }}
       >
-        {/* Left Column: Brand Title, Tagline & Primary Statement (Cols 1-7) */}
-        <div style={{ gridColumn: 'span 7' }}>
+        {/* Left Column: Brand Title, Tagline & Primary Statement */}
+        <div style={{ flex: '1 1 500px', minWidth: '280px' }}>
           <h1
             className="font-display"
             style={{
-              fontSize: 'clamp(4rem, 9vw, 7.5rem)',
+              fontSize: 'clamp(3.5rem, 8vw, 7.5rem)',
               letterSpacing: '0.02em',
               textTransform: 'uppercase',
               color: 'var(--vyora-text)',
@@ -51,10 +53,10 @@ export default function LandingHero({ onSignIn }) {
           <p
             className="font-display"
             style={{
-              fontSize: 'clamp(1.6rem, 3.5vw, 2.5rem)',
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)',
               fontStyle: 'italic',
               color: 'var(--vyora-accent)',
-              marginBottom: '32px'
+              marginBottom: '28px'
             }}
           >
             Find Your Vibe.
@@ -62,7 +64,7 @@ export default function LandingHero({ onSignIn }) {
 
           <div
             style={{
-              padding: '28px 32px',
+              padding: '24px 28px',
               backgroundColor: 'var(--vyora-surface)',
               borderLeft: '4px solid var(--vyora-accent)',
               borderRadius: '4px',
@@ -73,7 +75,7 @@ export default function LandingHero({ onSignIn }) {
             <h2
               className="heading-editorial"
               style={{
-                fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)',
+                fontSize: 'clamp(1.6rem, 3.2vw, 2.6rem)',
                 color: 'var(--vyora-text)',
                 lineHeight: 1.1,
                 marginBottom: '10px'
@@ -81,18 +83,19 @@ export default function LandingHero({ onSignIn }) {
             >
               "WHAT ARE WE FEELING TODAY?"
             </h2>
-            <p style={{ fontSize: '1.05rem', color: 'var(--vyora-text-muted)', margin: 0, lineHeight: 1.5 }}>
+            <p style={{ fontSize: '1rem', color: 'var(--vyora-text-muted)', margin: 0, lineHeight: 1.5 }}>
               Let VYORA figure it out. A movie magazine that learned how to read your vibe.
             </p>
           </div>
         </div>
 
-        {/* Right Column: Visual Poster Composition (Cols 8-12) */}
-        <div style={{ gridColumn: 'span 5', position: 'relative' }}>
+        {/* Right Column: Visual Poster Composition */}
+        <div style={{ flex: '1 1 320px', minWidth: '280px', display: 'flex', justifyContent: 'center' }}>
           <div
             style={{
               position: 'relative',
               width: '100%',
+              maxWidth: '340px',
               minHeight: '340px',
               display: 'flex',
               alignItems: 'center',
@@ -103,17 +106,18 @@ export default function LandingHero({ onSignIn }) {
               style={{
                 width: '260px',
                 height: '370px',
-                borderRadius: '4px',
+                borderRadius: '6px',
                 overflow: 'hidden',
                 boxShadow: 'var(--shadow-lg)',
                 border: '3px solid var(--vyora-border-strong)',
                 transform: 'rotate(-2deg)'
               }}
-              className="animate-float"
+              className="animate-float gpu-accelerated"
             >
               <img
                 src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800"
                 alt="Arrival Movie Visual Hero"
+                loading="eager"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
               <div
@@ -144,7 +148,7 @@ export default function LandingHero({ onSignIn }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '24px',
           maxWidth: '860px',
           margin: '0 auto 48px auto'
@@ -157,11 +161,19 @@ export default function LandingHero({ onSignIn }) {
             padding: '32px 28px',
             backgroundColor: 'var(--vyora-surface)',
             border: '2px solid var(--vyora-accent)',
-            borderRadius: '4px',
+            borderRadius: '6px',
             cursor: 'pointer',
             textAlign: 'left',
             transition: 'transform 0.3s var(--ease-cinematic), boxShadow 0.3s ease',
             boxShadow: 'var(--shadow-md)'
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'translateY(-4px)';
+            e.currentTarget.style.boxShadow = 'var(--shadow-lg), var(--vyora-glow)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'none';
+            e.currentTarget.style.boxShadow = 'var(--shadow-md)';
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
@@ -207,7 +219,7 @@ export default function LandingHero({ onSignIn }) {
             padding: '32px 28px',
             backgroundColor: 'var(--vyora-bg-secondary)',
             border: '1px dashed var(--vyora-border-strong)',
-            borderRadius: '4px',
+            borderRadius: '6px',
             textAlign: 'left',
             opacity: 0.85,
             position: 'relative'

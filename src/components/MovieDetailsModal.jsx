@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MovieDNA from './MovieDNA';
 import RecommendationExplanation from './RecommendationExplanation';
 import MovieConstellation from './MovieConstellation';
-import { X, Star, Bookmark, CheckCircle, Share2, Film, Clock, User } from 'lucide-react';
+import { X, Star, Bookmark, CheckCircle, ShieldCheck } from 'lucide-react';
 
 export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMovie }) {
   const [userRating, setUserRating] = useState(null);
@@ -18,11 +18,11 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
         inset: 0,
         zIndex: 2000,
         backgroundColor: 'rgba(18, 10, 24, 0.85)',
-        backdropFilter: 'blur(8px)',
+        backdropFilter: 'blur(10px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '24px',
+        padding: '16px',
         overflowY: 'auto'
       }}
       className="animate-fade-in"
@@ -33,10 +33,10 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
         style={{
           width: '100%',
           maxWidth: '960px',
-          maxHeight: '90vh',
+          maxHeight: '90dvh',
           backgroundColor: 'var(--vyora-bg)',
           border: '1px solid var(--vyora-border-strong)',
-          borderRadius: '4px',
+          borderRadius: '8px',
           overflowY: 'auto',
           boxShadow: 'var(--shadow-lg)',
           position: 'relative'
@@ -48,11 +48,11 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
           aria-label="Close modal"
           style={{
             position: 'absolute',
-            top: '20px',
-            right: '20px',
+            top: '16px',
+            right: '16px',
             zIndex: 30,
-            width: '40px',
-            height: '40px',
+            width: '38px',
+            height: '38px',
             borderRadius: '50%',
             backgroundColor: 'var(--vyora-surface)',
             color: 'var(--vyora-text)',
@@ -64,7 +64,7 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
             boxShadow: 'var(--shadow-sm)'
           }}
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
         {/* Hero Backdrop Header */}
@@ -72,7 +72,7 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
           style={{
             position: 'relative',
             width: '100%',
-            height: '320px',
+            minHeight: '280px',
             backgroundColor: 'var(--vyora-bg-secondary)',
             overflow: 'hidden'
           }}
@@ -84,27 +84,30 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              opacity: 0.6
+              position: 'absolute',
+              inset: 0,
+              opacity: 0.55
             }}
           />
           <div
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to top, var(--vyora-bg) 0%, transparent 80%)'
+              background: 'linear-gradient(to top, var(--vyora-bg) 0%, transparent 85%)'
             }}
           />
 
           {/* Poster & Header Info Overlay */}
           <div
             style={{
-              position: 'absolute',
-              bottom: '24px',
-              left: '32px',
-              right: '32px',
+              position: 'relative',
+              zIndex: 10,
+              padding: '24px 24px 20px 24px',
               display: 'flex',
-              gap: '24px',
-              alignItems: 'flex-end'
+              gap: '20px',
+              alignItems: 'flex-end',
+              flexWrap: 'wrap',
+              marginTop: '80px'
             }}
           >
             {/* Poster thumbnail */}
@@ -112,8 +115,8 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
               src={movie.poster}
               alt={movie.title}
               style={{
-                width: '130px',
-                height: '190px',
+                width: '120px',
+                height: '175px',
                 objectFit: 'cover',
                 borderRadius: '4px',
                 border: '3px solid var(--vyora-surface)',
@@ -122,22 +125,22 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
               }}
             />
 
-            <div>
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+            <div style={{ flex: '1 1 280px' }}>
+              <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
                 <span className="stamp-badge-gold">{movie.year}</span>
-                {movie.genres.map(g => (
+                {movie.genres?.map(g => (
                   <span key={g} className="stamp-badge">{g}</span>
                 ))}
               </div>
 
               <h1
                 className="heading-editorial"
-                style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--vyora-text)', lineHeight: 1.05 }}
+                style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: 'var(--vyora-text)', lineHeight: 1.05 }}
               >
                 {movie.title}
               </h1>
 
-              <p style={{ fontSize: '0.95rem', color: 'var(--vyora-accent-secondary)', fontWeight: 600, marginTop: '6px', margin: '6px 0 0 0' }}>
+              <p style={{ fontSize: '0.9rem', color: 'var(--vyora-accent-secondary)', fontWeight: 600, marginTop: '6px' }}>
                 Directed by {movie.director} • {movie.runtime} • Rating: <Star size={14} fill="var(--vyora-gold)" color="var(--vyora-gold)" style={{ display: 'inline' }} /> {movie.rating} / 10
               </p>
             </div>
@@ -145,23 +148,23 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
         </div>
 
         {/* Modal Body Content */}
-        <div style={{ padding: '32px' }}>
+        <div style={{ padding: '24px' }}>
           {/* Tagline & Synopsis */}
           {movie.tagline && (
             <p
               style={{
-                fontSize: '1.15rem',
+                fontSize: '1.1rem',
                 fontStyle: 'italic',
                 color: 'var(--vyora-accent)',
                 fontFamily: 'var(--font-display)',
-                marginBottom: '16px'
+                marginBottom: '14px'
               }}
             >
               "{movie.tagline}"
             </p>
           )}
 
-          <p style={{ fontSize: '1rem', color: 'var(--vyora-text)', lineHeight: 1.6, marginBottom: '32px' }}>
+          <p style={{ fontSize: '0.95rem', color: 'var(--vyora-text)', lineHeight: 1.6, marginBottom: '28px' }}>
             {movie.description}
           </p>
 
@@ -169,11 +172,11 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
           <div
             style={{
               display: 'flex',
-              gap: '16px',
-              marginBottom: '40px',
+              gap: '12px',
+              marginBottom: '32px',
               padding: '16px',
               backgroundColor: 'var(--vyora-surface)',
-              borderRadius: '4px',
+              borderRadius: '6px',
               border: '1px solid var(--vyora-border)',
               alignItems: 'center',
               flexWrap: 'wrap'
@@ -185,16 +188,17 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '10px 18px',
+                padding: '10px 16px',
                 backgroundColor: inWatchlist ? 'var(--vyora-accent-secondary)' : 'var(--vyora-bg-secondary)',
                 color: inWatchlist ? '#FFF' : 'var(--vyora-text)',
                 border: '1px solid var(--vyora-border-strong)',
                 borderRadius: '3px',
                 fontWeight: 600,
+                fontSize: '0.85rem',
                 cursor: 'pointer'
               }}
             >
-              <Bookmark size={16} fill={inWatchlist ? '#FFF' : 'none'} />
+              <Bookmark size={15} fill={inWatchlist ? '#FFF' : 'none'} />
               <span>{inWatchlist ? 'IN WATCHLIST' : 'ADD TO WATCHLIST'}</span>
             </button>
 
@@ -204,50 +208,61 @@ export default function MovieDetailsModal({ movie, onClose, onSelectConnectedMov
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '10px 18px',
+                padding: '10px 16px',
                 backgroundColor: watched ? 'var(--vyora-accent)' : 'var(--vyora-bg-secondary)',
                 color: watched ? '#120A18' : 'var(--vyora-text)',
                 border: '1px solid var(--vyora-border-strong)',
                 borderRadius: '3px',
                 fontWeight: 600,
+                fontSize: '0.85rem',
                 cursor: 'pointer'
               }}
             >
-              <CheckCircle size={16} />
+              <CheckCircle size={15} />
               <span>{watched ? 'MARKED WATCHED' : 'MARK AS WATCHED'}</span>
             </button>
 
             {/* Quick Star Rating */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--vyora-text-muted)' }}>YOUR RATING:</span>
-              {[1, 2, 3, 4, 5].map(star => (
-                <button
-                  key={star}
-                  onClick={() => setUserRating(star)}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '2px'
-                  }}
-                >
-                  <Star
-                    size={20}
-                    fill={userRating && userRating >= star ? 'var(--vyora-gold)' : 'none'}
-                    color="var(--vyora-gold)"
-                  />
-                </button>
-              ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'auto', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--vyora-text-muted)' }}>YOUR RATING:</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                {[1, 2, 3, 4, 5].map(star => (
+                  <button
+                    key={star}
+                    onClick={() => setUserRating(star)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: '2px'
+                    }}
+                  >
+                    <Star
+                      size={18}
+                      fill={userRating && userRating >= star ? 'var(--vyora-gold)' : 'none'}
+                      color="var(--vyora-gold)"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Deep Breakdown Grid (DNA + Why You'll Like This) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '28px', marginBottom: '32px' }}>
-            <div style={{ gridColumn: 'span 6' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: '24px',
+              marginBottom: '32px'
+            }}
+          >
+            <div style={{ flex: '1 1 340px' }}>
               <MovieDNA movie={movie} />
             </div>
 
-            <div style={{ gridColumn: 'span 6' }}>
+            <div style={{ flex: '1 1 340px' }}>
               <RecommendationExplanation movie={movie} />
             </div>
           </div>

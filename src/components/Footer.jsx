@@ -36,8 +36,8 @@ export default function Footer() {
       style={{
         backgroundColor: 'var(--vyora-bg-secondary)',
         borderTop: '1px solid var(--vyora-border-strong)',
-        padding: '80px 24px 40px 24px',
-        marginTop: '100px',
+        padding: '60px 20px 40px 20px',
+        marginTop: '80px',
         position: 'relative',
         overflow: 'hidden'
       }}
@@ -76,7 +76,7 @@ export default function Footer() {
           <h2
             className="font-display"
             style={{
-              fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+              fontSize: 'clamp(2rem, 4.5vw, 3.8rem)',
               color: 'var(--vyora-text)',
               lineHeight: 1.1,
               marginBottom: '12px'
@@ -87,7 +87,7 @@ export default function Footer() {
 
           <p
             style={{
-              fontSize: '1.05rem',
+              fontSize: '1rem',
               color: 'var(--vyora-text-muted)',
               maxWidth: '560px',
               margin: '0 auto',
@@ -105,25 +105,27 @@ export default function Footer() {
         <VyoraPet />
 
         {/* ==================================================================
-            3. MAIN FOOTER CONTENT GRID
+            3. MAIN FOOTER CONTENT FLEX GRID (Ultra-Responsive)
            ================================================================== */}
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
             gap: '36px',
-            alignItems: 'start',
-            marginBottom: '60px'
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            marginBottom: '50px'
           }}
         >
-          {/* DEVELOPER CARDS (Cols 1-7) */}
-          <div style={{ gridColumn: 'span 7' }}>
+          {/* DEVELOPER CARDS (Flex 1 1 520px) */}
+          <div style={{ flex: '1 1 480px', minWidth: '280px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
               <Sparkles size={16} color="var(--vyora-accent)" />
               <h3
                 className="font-display"
                 style={{
-                  fontSize: '1.4rem',
+                  fontSize: '1.3rem',
                   color: 'var(--vyora-text)',
                   textTransform: 'uppercase',
                   margin: 0
@@ -136,7 +138,7 @@ export default function Footer() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '20px'
               }}
             >
@@ -161,13 +163,13 @@ export default function Footer() {
                   e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
                   <img
                     src="/diya.jpg"
                     alt="Diya Developer Photo"
                     style={{
-                      width: '64px',
-                      height: '64px',
+                      width: '58px',
+                      height: '58px',
                       borderRadius: '50%',
                       objectFit: 'cover',
                       border: '2px solid var(--vyora-accent)',
@@ -178,7 +180,7 @@ export default function Footer() {
                     <h4
                       className="font-display"
                       style={{
-                        fontSize: '1.4rem',
+                        fontSize: '1.3rem',
                         color: 'var(--vyora-text)',
                         margin: '0 0 2px 0',
                         lineHeight: 1
@@ -188,7 +190,7 @@ export default function Footer() {
                     </h4>
                     <span
                       style={{
-                        fontSize: '0.78rem',
+                        fontSize: '0.75rem',
                         fontWeight: 700,
                         letterSpacing: '0.06em',
                         color: 'var(--vyora-accent)',
@@ -200,26 +202,26 @@ export default function Footer() {
                   </div>
                 </div>
 
-                <p style={{ fontSize: '0.88rem', color: 'var(--vyora-text-muted)', margin: '0 0 16px 0', lineHeight: 1.4 }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--vyora-text-muted)', margin: '0 0 14px 0', lineHeight: 1.4 }}>
                   "Turns ideas into interfaces."
                 </p>
 
                 {/* Developer Social Links */}
-                <div style={{ display: 'flex', gap: '12px', borderTop: '1px dashed var(--vyora-border)', paddingTop: '12px' }}>
+                <div style={{ display: 'flex', gap: '10px', borderTop: '1px dashed var(--vyora-border)', paddingTop: '10px', flexWrap: 'wrap' }}>
                   <a
                     href="https://github.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.75rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--vyora-accent)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--vyora-text-muted)'}
                   >
-                    <Globe size={13} /> GitHub
+                    <Globe size={12} /> GitHub
                   </a>
                   <a
                     href="#"
                     onClick={e => { e.preventDefault(); alert("Diya's LinkedIn URL: YOUR_LINKEDIN_URL"); }}
-                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.75rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--vyora-accent)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--vyora-text-muted)'}
                   >
@@ -228,7 +230,7 @@ export default function Footer() {
                   <a
                     href="#"
                     onClick={e => { e.preventDefault(); alert("Diya's Portfolio URL: YOUR_PORTFOLIO_URL"); }}
-                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.75rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--vyora-accent)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--vyora-text-muted)'}
                   >
@@ -258,13 +260,13 @@ export default function Footer() {
                   e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
                   <img
                     src="/yatharth.jpg"
                     alt="Yatharth Developer Photo"
                     style={{
-                      width: '64px',
-                      height: '64px',
+                      width: '58px',
+                      height: '58px',
                       borderRadius: '50%',
                       objectFit: 'cover',
                       border: '2px solid var(--vyora-accent-secondary)',
@@ -275,7 +277,7 @@ export default function Footer() {
                     <h4
                       className="font-display"
                       style={{
-                        fontSize: '1.4rem',
+                        fontSize: '1.3rem',
                         color: 'var(--vyora-text)',
                         margin: '0 0 2px 0',
                         lineHeight: 1
@@ -285,7 +287,7 @@ export default function Footer() {
                     </h4>
                     <span
                       style={{
-                        fontSize: '0.78rem',
+                        fontSize: '0.75rem',
                         fontWeight: 700,
                         letterSpacing: '0.06em',
                         color: 'var(--vyora-accent-secondary)',
@@ -297,26 +299,26 @@ export default function Footer() {
                   </div>
                 </div>
 
-                <p style={{ fontSize: '0.88rem', color: 'var(--vyora-text-muted)', margin: '0 0 16px 0', lineHeight: 1.4 }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--vyora-text-muted)', margin: '0 0 14px 0', lineHeight: 1.4 }}>
                   "Builds the intelligence behind the recommendations."
                 </p>
 
                 {/* Developer Social Links */}
-                <div style={{ display: 'flex', gap: '12px', borderTop: '1px dashed var(--vyora-border)', paddingTop: '12px' }}>
+                <div style={{ display: 'flex', gap: '10px', borderTop: '1px dashed var(--vyora-border)', paddingTop: '10px', flexWrap: 'wrap' }}>
                   <a
                     href="https://github.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.75rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--vyora-accent-secondary)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--vyora-text-muted)'}
                   >
-                    <Globe size={13} /> GitHub
+                    <Globe size={12} /> GitHub
                   </a>
                   <a
                     href="#"
                     onClick={e => { e.preventDefault(); alert("Yatharth's LinkedIn URL: YOUR_LINKEDIN_URL"); }}
-                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.75rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--vyora-accent-secondary)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--vyora-text-muted)'}
                   >
@@ -325,7 +327,7 @@ export default function Footer() {
                   <a
                     href="#"
                     onClick={e => { e.preventDefault(); alert("Yatharth's Portfolio URL: YOUR_PORTFOLIO_URL"); }}
-                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    style={{ color: 'var(--vyora-text-muted)', fontSize: '0.75rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--vyora-accent-secondary)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--vyora-text-muted)'}
                   >
@@ -336,15 +338,15 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* DISCOVERY PATHS (Cols 8-10) */}
-          <div style={{ gridColumn: 'span 3' }}>
+          {/* DISCOVERY PATHS (Flex 1 1 200px) */}
+          <div style={{ flex: '1 1 200px', minWidth: '180px' }}>
             <h4
               className="font-display"
               style={{
-                fontSize: '1.2rem',
+                fontSize: '1.15rem',
                 color: 'var(--vyora-text)',
                 textTransform: 'uppercase',
-                marginBottom: '16px',
+                marginBottom: '14px',
                 letterSpacing: '0.06em'
               }}
             >
@@ -353,31 +355,31 @@ export default function Footer() {
 
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
-                <Link to="/movie-home" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Link to="/movie-home" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Film size={14} color="var(--vyora-accent)" />
                   <span>Reel Vibe Movie Home</span>
                 </Link>
               </li>
               <li>
-                <Link to="/library" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Link to="/library" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Info size={14} color="var(--vyora-accent)" />
                   <span>Vibe Library</span>
                 </Link>
               </li>
               <li>
-                <Link to="/circle" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Link to="/circle" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Heart size={14} color="var(--vyora-accent)" />
                   <span>Vibe Circle Network</span>
                 </Link>
               </li>
               <li>
-                <Link to="/universe" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Link to="/universe" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Sparkles size={14} color="var(--vyora-accent)" />
                   <span>My Universe</span>
                 </Link>
               </li>
               <li>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.88rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--vyora-text-muted)', textDecoration: 'none', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Globe size={14} color="var(--vyora-accent)" />
                   <span>GitHub Repository</span>
                 </a>
@@ -385,15 +387,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* KEEP VYORA BREWING + PROMISE (Cols 11-12) */}
-          <div style={{ gridColumn: 'span 2' }}>
+          {/* KEEP VYORA BREWING + SUPPORT (Flex 1 1 200px) */}
+          <div style={{ flex: '1 1 200px', minWidth: '180px' }}>
             <h4
               className="font-display"
               style={{
-                fontSize: '1.2rem',
+                fontSize: '1.15rem',
                 color: 'var(--vyora-text)',
                 textTransform: 'uppercase',
-                marginBottom: '16px',
+                marginBottom: '14px',
                 letterSpacing: '0.06em'
               }}
             >
@@ -443,7 +445,7 @@ export default function Footer() {
            ================================================================== */}
         <div
           style={{
-            padding: '24px',
+            padding: '20px 24px',
             backgroundColor: 'var(--vyora-surface)',
             border: '1px solid var(--vyora-border-strong)',
             borderRadius: '6px',
@@ -451,7 +453,7 @@ export default function Footer() {
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '20px',
+            gap: '16px',
             marginBottom: '40px'
           }}
         >
@@ -460,7 +462,7 @@ export default function Footer() {
             <h5
               className="font-display"
               style={{
-                fontSize: '1.3rem',
+                fontSize: '1.2rem',
                 color: 'var(--vyora-text)',
                 margin: '0 0 4px 0',
                 letterSpacing: '0.04em'
@@ -468,13 +470,13 @@ export default function Footer() {
             >
               NO ENDLESS SCROLLING. JUST SOMETHING WORTH WATCHING.
             </h5>
-            <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--vyora-gold)', fontWeight: 700 }}>
+            <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--vyora-gold)', fontWeight: 700 }}>
               DISCOVER • FEEL • WATCH
             </span>
           </div>
 
           {/* Built With */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--vyora-text-muted)', fontWeight: 600 }}>
               BUILT WITH:
             </span>
@@ -524,7 +526,7 @@ export default function Footer() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '24px'
+            padding: '20px'
           }}
           className="animate-fade-in"
           onClick={() => setIsSupportModalOpen(false)}
@@ -537,7 +539,7 @@ export default function Footer() {
               backgroundColor: 'var(--vyora-surface)',
               border: '2px solid var(--vyora-accent)',
               borderRadius: '8px',
-              padding: '32px 28px',
+              padding: '28px 24px',
               boxShadow: '0 20px 50px rgba(18, 10, 24, 0.9)',
               position: 'relative',
               textAlign: 'center'

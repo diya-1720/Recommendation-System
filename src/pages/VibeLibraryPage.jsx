@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SectionTitle from '../components/SectionTitle';
 import MovieGrid from '../components/MovieGrid';
 import { getMovies, SUB_VIBES } from '../services/api';
-import { Search } from 'lucide-react';
+import { Search, SlidersHorizontal } from 'lucide-react';
 
 export default function VibeLibraryPage({ onSelectMovie }) {
   const [movies, setMovies] = useState([]);
@@ -80,7 +80,7 @@ export default function VibeLibraryPage({ onSelectMovie }) {
       style={{
         maxWidth: '1280px',
         margin: '0 auto',
-        padding: '40px 24px 80px 24px',
+        padding: '30px 16px 80px 16px',
       }}
     >
       <SectionTitle
@@ -89,14 +89,119 @@ export default function VibeLibraryPage({ onSelectMovie }) {
         subtitle="Deep exploration of films organized by major genres and nuanced sub-vibe micro-categories."
       />
 
-      {/* MAIN GENRE TABS */}
+      {/* TOP CONTROL BAR: SEARCH + SORT */}
       <div
         style={{
           display: 'flex',
-          gap: '10px',
-          overflowX: 'auto',
-          paddingBottom: '16px',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '16px',
           marginBottom: '24px',
+          flexWrap: 'wrap',
+          backgroundColor: 'var(--bg-card)',
+          padding: '16px 20px',
+          border: '1px solid var(--border-medium)',
+          borderRadius: '6px',
+        }}
+      >
+        {/* SEARCH */}
+        <div
+          style={{
+            position: 'relative',
+            flexGrow: 1,
+            maxWidth: '500px',
+          }}
+        >
+          <Search
+            size={16}
+            color="var(--accent-burnt-orange)"
+            style={{
+              position: 'absolute',
+              left: '14px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+            }}
+          />
+
+          <input
+            type="text"
+            placeholder={`Search within ${selectedGenre}...`}
+            value={searchQuery}
+            onChange={(e) =>
+              setSearchQuery(e.target.value)
+            }
+            style={{
+              width: '100%',
+              padding: '10px 14px 10px 38px',
+              backgroundColor: 'var(--bg-sand)',
+              border: '1px solid var(--border-medium)',
+              borderRadius: '4px',
+              fontSize: '0.9rem',
+              color: 'var(--text-charcoal)',
+              outline: 'none',
+            }}
+          />
+        </div>
+
+        {/* SORT */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <SlidersHorizontal size={14} color="var(--accent-burnt-orange)" />
+          <span
+            style={{
+              fontSize: '0.82rem',
+              color: 'var(--text-muted)',
+              fontWeight: 600
+            }}
+          >
+            Sort by:
+          </span>
+
+          <select
+            value={sortBy}
+            onChange={(e) =>
+              setSortBy(e.target.value)
+            }
+            style={{
+              padding: '8px 14px',
+              backgroundColor: 'var(--bg-sand)',
+              border: '1px solid var(--border-medium)',
+              borderRadius: '4px',
+              fontSize: '0.85rem',
+              color: 'var(--text-charcoal)',
+              cursor: 'pointer'
+            }}
+          >
+            <option value="rating">
+              Highest Rating
+            </option>
+            <option value="match">
+              Highest Vibe Match
+            </option>
+            <option value="year">
+              Release Year
+            </option>
+            <option value="title">
+              Title A-Z
+            </option>
+          </select>
+        </div>
+      </div>
+
+      {/* MAIN GENRE TABS */}
+      <div
+        className="no-scrollbar"
+        style={{
+          display: 'flex',
+          gap: '8px',
+          overflowX: 'auto',
+          paddingBottom: '8px',
+          marginBottom: '20px',
         }}
       >
         {mainGenres.map((genre) => {
@@ -110,20 +215,23 @@ export default function VibeLibraryPage({ onSelectMovie }) {
                 setSelectedSubVibe('All');
               }}
               style={{
-                padding: '10px 20px',
+                padding: '8px 18px',
                 backgroundColor: isActive
                   ? 'var(--accent-burnt-orange)'
                   : 'var(--bg-card)',
                 color: isActive
-                  ? '#FFF'
+                  ? '#120A18'
                   : 'var(--text-charcoal)',
-                border: '1px solid var(--border-medium)',
-                borderRadius: '3px',
-                fontWeight: isActive ? 'bold' : '500',
-                fontSize: '0.9rem',
+                border: isActive
+                  ? '1px solid var(--accent-burnt-orange)'
+                  : '1px solid var(--border-medium)',
+                borderRadius: '4px',
+                fontWeight: isActive ? '700' : '600',
+                fontSize: '0.82rem',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
                 transition: 'all 0.2s ease',
+                flexShrink: 0
               }}
             >
               {genre.toUpperCase()}
@@ -136,23 +244,24 @@ export default function VibeLibraryPage({ onSelectMovie }) {
       {currentSubVibes.length > 0 && (
         <div
           style={{
-            padding: '16px 20px',
+            padding: '12px 18px',
             backgroundColor: 'var(--bg-sand)',
             border: '1px solid var(--border-medium)',
-            borderRadius: '4px',
-            marginBottom: '32px',
+            borderRadius: '6px',
+            marginBottom: '28px',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            gap: '8px',
             flexWrap: 'wrap',
           }}
         >
           <span
             style={{
-              fontSize: '0.8rem',
-              fontWeight: 'bold',
+              fontSize: '0.78rem',
+              fontWeight: '700',
               textTransform: 'uppercase',
               color: 'var(--text-muted)',
+              marginRight: '4px'
             }}
           >
             SUB-VIBE:
@@ -161,7 +270,7 @@ export default function VibeLibraryPage({ onSelectMovie }) {
           <button
             onClick={() => setSelectedSubVibe('All')}
             style={{
-              padding: '4px 12px',
+              padding: '4px 10px',
               backgroundColor:
                 selectedSubVibe === 'All'
                   ? 'var(--accent-deep-wine)'
@@ -171,8 +280,9 @@ export default function VibeLibraryPage({ onSelectMovie }) {
                   ? '#FFF'
                   : 'var(--text-charcoal)',
               border: '1px solid var(--border-medium)',
-              borderRadius: '2px',
-              fontSize: '0.8rem',
+              borderRadius: '3px',
+              fontSize: '0.78rem',
+              fontWeight: 600,
               cursor: 'pointer',
             }}
           >
@@ -190,7 +300,7 @@ export default function VibeLibraryPage({ onSelectMovie }) {
                   setSelectedSubVibe(subVibe)
                 }
                 style={{
-                  padding: '4px 12px',
+                  padding: '4px 10px',
                   backgroundColor: isActive
                     ? 'var(--accent-deep-wine)'
                     : 'var(--bg-card)',
@@ -199,8 +309,9 @@ export default function VibeLibraryPage({ onSelectMovie }) {
                     : 'var(--text-charcoal)',
                   border:
                     '1px solid var(--border-medium)',
-                  borderRadius: '2px',
-                  fontSize: '0.8rem',
+                  borderRadius: '3px',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
                   cursor: 'pointer',
                 }}
               >
@@ -211,118 +322,19 @@ export default function VibeLibraryPage({ onSelectMovie }) {
         </div>
       )}
 
-      {/* SEARCH + SORT */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '16px',
-          marginBottom: '32px',
-          flexWrap: 'wrap',
-        }}
-      >
-        {/* SEARCH */}
-        <div
-          style={{
-            position: 'relative',
-            flexGrow: 1,
-            maxWidth: '440px',
-          }}
-        >
-          <Search
-            size={16}
-            color="var(--accent-burnt-orange)"
-            style={{
-              position: 'absolute',
-              left: '12px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-            }}
-          />
-
-          <input
-            type="text"
-            placeholder={`Search within ${selectedGenre}...`}
-            value={searchQuery}
-            onChange={(e) =>
-              setSearchQuery(e.target.value)
-            }
-            style={{
-              width: '100%',
-              padding: '10px 12px 10px 36px',
-              backgroundColor: 'var(--bg-card)',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '2px',
-              fontSize: '0.9rem',
-              color: 'var(--text-charcoal)',
-              outline: 'none',
-            }}
-          />
-        </div>
-
-        {/* SORT */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <span
-            style={{
-              fontSize: '0.82rem',
-              color: 'var(--text-muted)',
-            }}
-          >
-            Sort by:
-          </span>
-
-          <select
-            value={sortBy}
-            onChange={(e) =>
-              setSortBy(e.target.value)
-            }
-            style={{
-              padding: '8px 14px',
-              backgroundColor: 'var(--bg-card)',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '2px',
-              fontSize: '0.85rem',
-              color: 'var(--text-charcoal)',
-            }}
-          >
-            <option value="rating">
-              Highest Rating
-            </option>
-
-            <option value="match">
-              Highest Vibe Match
-            </option>
-
-            <option value="year">
-              Release Year
-            </option>
-
-            <option value="title">
-              Title A-Z
-            </option>
-          </select>
-        </div>
-      </div>
-
       {/* RESULT STATUS */}
       <div
         style={{
           marginBottom: '20px',
-          fontSize: '0.8rem',
+          fontSize: '0.78rem',
           color: 'var(--text-muted)',
           textTransform: 'uppercase',
-          letterSpacing: '0.05em',
+          letterSpacing: '0.08em',
+          fontWeight: 600
         }}
       >
         {loading
-          ? 'LOADING FILMS...'
+          ? 'LOADING ARCHIVE...'
           : `SHOWING ${movies.length} FILMS`}
       </div>
 
@@ -330,7 +342,7 @@ export default function VibeLibraryPage({ onSelectMovie }) {
       {error && (
         <div
           style={{
-            padding: '24px',
+            padding: '20px',
             marginBottom: '24px',
             border: '1px solid var(--accent-burnt-orange)',
             backgroundColor: 'var(--bg-card)',
@@ -365,7 +377,7 @@ export default function VibeLibraryPage({ onSelectMovie }) {
               textAlign: 'center',
               border: '1px dashed var(--border-medium)',
               backgroundColor: 'var(--bg-card)',
-              borderRadius: '4px',
+              borderRadius: '6px',
             }}
           >
             <div
@@ -392,7 +404,7 @@ export default function VibeLibraryPage({ onSelectMovie }) {
                 margin: 0,
               }}
             >
-              Try another genre, sub-vibe, or search.
+              Try another genre, sub-vibe, or search query.
             </p>
           </div>
         )}

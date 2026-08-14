@@ -56,11 +56,8 @@ export default function Home({ onSelectMovie }) {
     try {
       setError('');
 
-      // If the same mood is clicked again,
-      // reset back to all movies.
       if (selectedMood?.id === mood.id) {
         setSelectedMood(null);
-
         setLoading(true);
 
         const allMovies = await getMovies({
@@ -68,45 +65,32 @@ export default function Home({ onSelectMovie }) {
         });
 
         setMovies(allMovies);
-
         setLoading(false);
-
         return;
       }
 
       setSelectedMood(mood);
       setLoading(true);
 
-      // Get movies matching selected mood
       const filteredMovies = await getMovies({
         mood: mood.id,
         sortBy: 'match',
       });
 
       setMovies(filteredMovies);
-
       setLoading(false);
 
-      // Scroll to recommendations
-      const el = document.getElementById(
-        'recommendations'
-      );
-
+      // Smooth scroll to recommendations
+      const el = document.getElementById('recommendations');
       if (el) {
         el.scrollIntoView({
           behavior: 'smooth',
+          block: 'start',
         });
       }
     } catch (err) {
-      console.error(
-        'Failed to load mood recommendations:',
-        err
-      );
-
-      setError(
-        'Could not load recommendations for this mood.'
-      );
-
+      console.error('Failed to load mood recommendations:', err);
+      setError('Could not load recommendations for this mood.');
       setLoading(false);
     }
   };
@@ -124,14 +108,8 @@ export default function Home({ onSelectMovie }) {
 
       setMovies(allMovies);
     } catch (err) {
-      console.error(
-        'Failed to reset recommendations:',
-        err
-      );
-
-      setError(
-        'Could not reload the movie library.'
-      );
+      console.error('Failed to reset recommendations:', err);
+      setError('Could not reload the movie library.');
     } finally {
       setLoading(false);
     }
@@ -148,28 +126,18 @@ export default function Home({ onSelectMovie }) {
       });
 
       setMovies(sorted);
-
       setLoading(false);
 
-      const el = document.getElementById(
-        'recommendations'
-      );
-
+      const el = document.getElementById('recommendations');
       if (el) {
         el.scrollIntoView({
           behavior: 'smooth',
+          block: 'start',
         });
       }
     } catch (err) {
-      console.error(
-        'Failed to mix vibe:',
-        err
-      );
-
-      setError(
-        'Could not generate your vibe recommendations.'
-      );
-
+      console.error('Failed to mix vibe:', err);
+      setError('Could not generate your vibe recommendations.');
       setLoading(false);
     }
   };
@@ -179,13 +147,13 @@ export default function Home({ onSelectMovie }) {
       style={{
         maxWidth: '1280px',
         margin: '0 auto',
-        padding: '40px 24px 80px 24px',
+        padding: '30px 16px 80px 16px',
       }}
     >
       {/* Top Banner Header */}
       <div
         style={{
-          marginBottom: '48px',
+          marginBottom: '40px',
           textAlign: 'center',
         }}
       >
@@ -221,7 +189,7 @@ export default function Home({ onSelectMovie }) {
         <h1
           className="heading-editorial"
           style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4.2rem)',
+            fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
             color: 'var(--text-charcoal)',
             marginBottom: '8px',
           }}
@@ -231,7 +199,7 @@ export default function Home({ onSelectMovie }) {
 
         <p
           style={{
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             color: 'var(--text-muted)',
             maxWidth: '600px',
             margin: '0 auto 24px auto',
@@ -251,7 +219,7 @@ export default function Home({ onSelectMovie }) {
           className="btn-cinematic-secondary"
           style={{
             fontSize: '0.85rem',
-            padding: '8px 18px',
+            padding: '10px 20px',
           }}
         >
           <SlidersHorizontal size={15} />

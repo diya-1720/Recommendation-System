@@ -10,7 +10,7 @@ export default function MoodSelector({ moods, selectedMood, onSelectMood, onRese
       style={{
         maxWidth: '1280px',
         margin: '0 auto',
-        padding: '60px 24px 80px 24px'
+        padding: '50px 16px 70px 16px'
       }}
     >
       <SectionTitle
@@ -25,29 +25,30 @@ export default function MoodSelector({ moods, selectedMood, onSelectMood, onRese
           className="animate-fade-in"
           style={{
             marginBottom: '32px',
-            padding: '16px 24px',
-            backgroundColor: '#FAF6F0',
+            padding: '16px 20px',
+            backgroundColor: 'var(--vyora-surface)',
             border: `2px solid ${selectedMood.accent}`,
-            borderRadius: '3px',
+            borderRadius: '6px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '16px',
-            boxShadow: '0 4px 16px rgba(37, 35, 34, 0.06)'
+            boxShadow: 'var(--shadow-md), var(--vyora-glow)',
+            flexWrap: 'wrap'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div
               style={{
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
                 backgroundColor: selectedMood.accent,
-                boxShadow: `0 0 10px ${selectedMood.accent}`
+                boxShadow: `0 0 12px ${selectedMood.accent}`
               }}
               className="animate-glow"
             />
-            <span style={{ fontSize: '1.05rem', color: '#252322' }}>
+            <span style={{ fontSize: '1rem', color: 'var(--vyora-text)' }}>
               Your current mood: <strong style={{ color: selectedMood.accent, fontFamily: 'var(--font-editorial)' }}>{selectedMood.title}</strong>
             </span>
           </div>
@@ -58,14 +59,23 @@ export default function MoodSelector({ moods, selectedMood, onSelectMood, onRese
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '6px 12px',
-              backgroundColor: 'transparent',
-              border: '1px solid #746B63',
-              borderRadius: '2px',
+              padding: '6px 14px',
+              backgroundColor: 'var(--vyora-bg-secondary)',
+              border: '1px solid var(--vyora-border-strong)',
+              borderRadius: '4px',
               fontSize: '0.8rem',
-              color: '#252322',
+              color: 'var(--vyora-text)',
               cursor: 'pointer',
-              fontWeight: 600
+              fontWeight: 600,
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--vyora-accent)';
+              e.currentTarget.style.color = 'var(--vyora-accent)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--vyora-border-strong)';
+              e.currentTarget.style.color = 'var(--vyora-text)';
             }}
           >
             <X size={14} />
@@ -78,7 +88,7 @@ export default function MoodSelector({ moods, selectedMood, onSelectMood, onRese
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(230px, 45vw, 270px), 1fr))',
           gap: '20px'
         }}
       >
