@@ -1,9 +1,28 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.routes import movies, users
+from app.routes import movies, users
+from app.database import Base, engine
+from app.models.user import User
+
+
+# =========================
+# CREATE DATABASE TABLES
+# =========================
+
+Base.metadata.create_all(bind=engine)
+
+
+# =========================
+# FASTAPI APP
+# =========================
 
 app = FastAPI()
+
+
+# =========================
+# CORS
+# =========================
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,9 +35,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(movies.router, prefix="/api/movies")
-app.include_router(users.router, prefix="/api/users")
 
+# =========================
+# ROUTES
+# =========================
+
+app.include_router(
+    movies.router,
+    prefix="/api/movies"
+)
+
+app.include_router(
+    users.router,
+    prefix="/api/users"
+)
+
+
+# =========================
+# HOME
+# =========================
 
 @app.get("/")
 def home():
